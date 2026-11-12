@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Team Management System</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" 
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous" />
+        <style>
+            /* Applying an abstract gradient background */
+            body {
+                background: linear-gradient(45deg, #6a5acd, #ff6347, #ff4500, #32cd32, #1e90ff);
+                min-height: 100vh;
+                background-attachment: fixed;
+                color: white; /* Ensuring text is visible over the background */
+            }
+
+            .container {
+                background-color: rgba(255, 255, 255, 0.9); /* Adding a translucent background for the container */
+                padding: 20px;
+                border-radius: 10px;
+                margin-top: 50px;
+            }
+
+            h1, h2 {
+                color: #333;
+            }
+
+            .form-control {
+                background-color: #f8f9fa;
+                color: #333;
+            }
+
+            .btn {
+                margin: 5px;
+            }
+
+            .text-danger {
+                font-size: 0.9em;
+                color: red;
+            }
+
+            .row {
+                margin-bottom: 15px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Manage Team</h1>
+            <hr />
+            <h2>New Team</h2>
+            
+            <form action="#" th:action="@{/equipe/saveNew}" th:object="${equipe}" method="POST">
+                <!-- Div row with bg-light, g-3 for gutters, p-3 for padding -->
+                <div class="row bg-light g-3 p-3">
+                    <div class="mb-4 col-4">
+                        <label th:for="nom">Nom</label>
+                        <input type="text" th:field="*{nom}" placeholder="Equipe Nom" class="form-control" />
+                        <span class="text-danger" th:errors="*{nom}"></span>
+                    </div>
+                    <div class="mb-4 col-4">
+                        <label th:for="pays">Pays</label>
+                        <input type="text" th:field="*{pays}" placeholder="Equipe Pays" class="form-control" />
+                        <span class="text-danger" th:errors="*{pays}"></span>
+                    </div>
+                    <div class="mb-4 col-4">
+                        <label th:for="groupe">Groupe</label>
+                        <input type="text" th:field="*{groupe}" placeholder="Groupe" class="form-control" />
+                        <span class="text-danger" th:errors="*{groupe}"></span>
+                    </div>
+                    <div class="mb-4 col-4">
+                        <label th:for="classement">Classement</label>
+                        <input type="number" th:field="*{classement}" placeholder="Classement" class="form-control" />
+                        <span class="text-danger" th:errors="*{classement}"></span>
+                    </div>
+                    <div class="mb-4 col-4">
+                        <label th:for="entraineur">Entraineur</label>
+                        <input type="text" th:field="*{entraineur}" placeholder="Entraineur" class="form-control" />
+                        <span class="text-danger" th:errors="*{entraineur}"></span>
+                    </div>
+                </div>
+
+                <div class="row bg-light g-3 p-3">
+                    <!-- You can add other fields here if necessary -->
+                </div>
+
+                <div>
+                    <button type="submit" class="btn btn-primary col-2">Save</button>
+                    <a th:href = "@{/equipe}" class="btn btn-danger col-2">Cancel</a>
+                </div>
+            </form>
+            
+            <hr />
+            
+        </div>
+    </body>
+</html>

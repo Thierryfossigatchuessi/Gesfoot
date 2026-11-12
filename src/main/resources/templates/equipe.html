@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Team Management System</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" 
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous" />
+        <style>
+            /* Arrière-plan abstrait dynamique avec un dégradé vibrant */
+            body {
+                background: linear-gradient(45deg, #ff4b2b, #ff416c, #6a11cb, #2575fc, #44b3e1);
+                background-size: 400% 400%;
+                animation: gradientAnimation 15s ease infinite;
+                color: white;
+                min-height: 100vh;
+                margin: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            /* Animation pour un mouvement fluide du fond */
+            @keyframes gradientAnimation {
+                0% {
+                    background-position: 0% 50%;
+                }
+                50% {
+                    background-position: 100% 50%;
+                }
+                100% {
+                    background-position: 0% 50%;
+                }
+            }
+
+            /* Style pour le container */
+            .container {
+                background-color: rgba(255, 255, 255, 0.8);
+                padding: 30px;
+                border-radius: 10px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                max-width: 90%;
+                width: 900px;
+                margin-top: 50px;
+            }
+
+            h1, h2 {
+                color: #333;
+                text-align: center;
+            }
+
+            .btn {
+                margin: 5px;
+            }
+
+            .table th, .table td {
+                text-align: center;
+            }
+
+            .alert-danger {
+                margin-top: 15px;
+            }
+
+            .alert-success {
+                margin-top: 15px;
+                background-color: #28a745;
+                color: white;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="container my-2">
+            <h1>Team List</h1>
+            <hr />
+            <a th:href="@{/equipe/new}" class="btn btn-primary btn-sm mb-3">Add team</a>
+            
+            
+             <h2 class="mb-3">Team List</h2>
+            <div class="row">               
+                <div class="col">
+                    <form th:action="@{/team/filter1}" method="get">
+    <div class="form-group">
+        <label>Name or Country:</label>
+        <input type="text" name="filter" th:value="${filter}"/>
+        <button type="submit">Search</button>
+    </div>
+</form>
+
+                </div>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Team Name</th>
+                        <th>Team Country</th>
+                        <th>Team Group</th>
+                        <th>Team Rank</th>
+                        <th>Team Coach</th>
+                        <th>Players</th> <!-- Nouvelle colonne pour afficher les joueurs -->
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="equipe : ${listEquipe}">
+                        <td th:text="${equipe.nom}"></td>
+                        <td th:text="${equipe.pays}"></td>
+                        <td th:text="${equipe.groupe}"></td>
+                        <td th:text="${equipe.classement}"></td>
+                        <td th:text="${equipe.entraineur}"></td>
+                        <td>
+                            <ul>
+                                <li th:each="joueur : ${equipe.joueur}" th:text="${joueur.nom}"></li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a th:href="@{/equipe/update(id=${equipe.id})}" class="btn btn-warning">Update</a>
+                            <a th:href="@{/equipe/delete(id=${equipe.id})}" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Display success or error messages -->
+            <div th:if="${message}" th:text="${message}" class="alert alert-danger mb-3" role="alert"></div>
+            <div th:if="${successMessage}" th:text="${successMessage}" class="alert alert-success mb-3" role="alert"></div>
+            
+            <a th:href="@{/}" class="btn btn-secondary mt-3">Back to Welcome Page</a>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Ajouter un Spectateur</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" 
+              integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" 
+              crossorigin="anonymous" />
+    </head>
+    
+    <body>
+        <div class="container">
+            <h1>Ajouter un Spectateur</h1>
+            <hr />
+            
+            <!-- Formulaire d'ajout d'un spectateur -->
+            <form th:action="@{/spectateur/saveNew}" th:object="${spectateur}" method="POST">
+    <div class="mb-4 col-4">
+        <label th:for="nom">Nom</label>    
+        <input type="text" th:field="*{nom}" class="form-control" />
+        <span class="text-danger" th:errors="*{nom}"></span>
+    </div>
+    <div class="mb-4 col-4">
+        <label th:for="prenom">Prénom</label>    
+        <input type="text" th:field="*{prenom}" class="form-control" />
+        <span class="text-danger" th:errors="*{prenom}"></span>
+    </div>
+    <div class="mb-4 col-4">
+        <label th:for="email">Email</label>
+        <input type="email" th:field="*{email}" class="form-control" />
+        <span class="text-danger" th:errors="*{email}"></span>
+        <!-- Affichage du message d'erreur si l'email est déjà utilisé -->
+        <span class="text-danger" th:if="${emailError}" th:text="${emailError}"></span>
+    </div>
+
+    <div>
+        <button type="submit" class="btn btn-primary col-2">Enregistrer</button>
+        <a th:href="@{/spectateurs}" class="btn btn-danger col-2">Annuler</a>
+    </div>
+</form>
+
+            <hr />
+        </div>
+    </body>
+</html>

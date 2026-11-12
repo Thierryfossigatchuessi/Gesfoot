@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Gesfoot Management System</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous" />
+    <style>
+        /* Custom Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+        }
+        .card-header {
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+        .btn-outline-primary {
+            transition: transform 0.2s ease, background-color 0.3s;
+        }
+        .btn-outline-primary:hover {
+            transform: scale(1.05);
+            background-color: #007bff;
+            color: #fff;
+        }
+        footer {
+            margin-top: 30px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Header Section -->
+<header class="bg-dark text-white text-center py-5">
+    <h1 class="display-4">Gesfoot Management System</h1>
+    <p class="lead">Simplify and streamline your management tasks with elegance</p>
+</header>
+
+<!-- Main Content Section -->
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <!-- Feature Card -->
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white text-center">
+                    <h2 class="mb-0">Welcome to Gesfoot</h2>
+                </div>
+                <div class="card-body">
+                    <p class="text-center text-muted mb-4">
+                        Explore the modules below to manage teams, players, stadiums, and more.
+                    </p>
+                    <!-- Feature Buttons -->
+                    <div class="row g-4">
+                        <div class="col-6 col-md-4">
+                            <a class="btn btn-outline-primary d-flex align-items-center justify-content-center flex-column h-100 p-3"
+                               th:href="@{/equipe}">
+                                <i class="fas fa-users fa-2x mb-2"></i>
+                                <span class="fw-bold">Manage Team</span>
+                            </a>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <a class="btn btn-outline-primary d-flex align-items-center justify-content-center flex-column h-100 p-3"
+                               th:href="@{/joueur}">
+                                <i class="fas fa-user fa-2x mb-2"></i>
+                                <span class="fw-bold">Manage Player</span>
+                            </a>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <a class="btn btn-outline-primary d-flex align-items-center justify-content-center flex-column h-100 p-3"
+                               th:href="@{/rencontre}">
+                                <i class="fas fa-calendar-alt fa-2x mb-2"></i>
+                                <span class="fw-bold">Manage Meeting</span>
+                            </a>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <a class="btn btn-outline-primary d-flex align-items-center justify-content-center flex-column h-100 p-3"
+                               th:href="@{/stade}">
+                                <i class="fas fa-landmark fa-2x mb-2"></i>
+                                <span class="fw-bold">Manage Stadium</span>
+                            </a>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <a class="btn btn-outline-primary d-flex align-items-center justify-content-center flex-column h-100 p-3"
+                               th:href="@{/billet}">
+                                <i class="fas fa-ticket-alt fa-2x mb-2"></i>
+                                <span class="fw-bold">Manage Ticket</span>
+                            </a>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <a class="btn btn-outline-primary d-flex align-items-center justify-content-center flex-column h-100 p-3"
+                               th:href="@{/spectateur}">
+                                <i class="fas fa-user-friends fa-2x mb-2"></i>
+                                <span class="fw-bold">Manage Spectator</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer bg-light text-center text-muted">
+                    Gesfoot © 2025 | All Rights Reserved
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer Section -->
+<footer class="bg-dark text-white text-center py-3">
+    <small>Designed with ❤️ by Your Development Team | Powered by Bootstrap</small>
+</footer>
+
+</body>
+</html>

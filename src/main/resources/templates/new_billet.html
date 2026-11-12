@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Ajouter un Billet</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" 
+              integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" 
+              crossorigin="anonymous"/>
+    </head>
+    <body>
+        <div class="container my-4">
+            <h1 class="mb-3">Ajouter un nouveau billet</h1>
+
+            <form action="/billet/saveNew" method="post" th:object="${billet}">
+                <!-- div contenant toutes les div d'input avec des gouttières et fond bg-light -->
+                <div class="row bg-light g-3 p-3">
+                    <div class="mb-3 col-4">
+                        <label for="prix" class="form-label">Prix :</label>
+                        <input type="number" id="prix" name="prix" class="form-control" th:field="*{prix}" required />
+                        <span class="text-danger" th:errors="*{prix}"></span>
+                    </div>
+
+                    <div class="mb-3 col-4">
+                        <label for="vendu" class="form-label">Vendu :</label>
+                        <input type="checkbox" id="vendu" name="vendu" class="form-check-input" th:field="*{vendu}" />
+                    </div>
+
+                    <div class="mb-3 col-4">
+                        <label for="dateAchat" class="form-label">Date d'achat :</label>
+                        <input type="date" id="dateAchat" name="dateAchat" class="form-control" th:field="*{dateAchat}" required />
+                    </div>
+
+                    <div class="mb-3 col-4">
+                        <label for="spectateur" class="form-label">Spectateur :</label>
+                        <select id="spectateur" name="spectateur.id" class="form-select" th:field="*{spectateur.id}" required>
+                            <option th:each="spectateur : ${spectateurs}" 
+                                    th:value="${spectateur.id}" 
+                                    th:text="${spectateur.nom} + ' ' + ${spectateur.prenom}"></option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3 col-4">
+                        <label for="rencontre" class="form-label">Rencontre :</label>
+                        <select id="rencontre" name="rencontre.id" class="form-select" th:field="*{rencontre.id}" required>
+                            <option th:each="rencontre : ${rencontres}" 
+                                    th:value="${rencontre.id}" 
+                                    th:text="${rencontre.dateEtHeure}"></option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+            </form>
+
+            <a href="/billet" class="btn btn-secondary mt-3">Retour à la liste des billets</a>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Stade List</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" 
+              integrity="sha384
+              KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" 
+              crossorigin="anonymous"/>
+
+    </head>
+    <body>
+        
+        <div class="container my-2">
+            <form th:action="@{/stade}" method="get">
+                <div class="form-group">
+                    <label>Mot-clé:</label>
+                    <input type="text" name="motCle" placeholder="Nom du stade" />
+                    <button type="submit">Chercher</button>
+                </div>
+            </form>
+        </div>
+        
+        <div class="container my-2" >
+            <h1>Stade List</h1>
+            <hr />
+            <a th:href = "@{/stade/new}" class="btn btn-primary mt-2">Add Stade</a>
+            <h2 class="mb-3">Stade List</h2>
+            <table  class="table table-striped" >
+                <thead>
+                    <tr>
+
+                        <th>id</th> 
+                        <th>Nom</th>
+                        <th>Pays</th>
+                        <th>Ville</th>
+                        <th>capacite</th>
+                        <th>Actions</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="stade : ${listStade}">
+                        <td th:text="${stade.id}"></td>
+                        <td th:text="${stade.nom}"></td>
+                        <td th:text="${stade.pays}"></td>
+                        <td th:text="${stade.ville}"></td>
+                        <td th:text="${stade.capacite}"></td>
+                        <td><a th:href="@{/stade/update(id=${stade.id})}" class="btn btn-primary">Update</a>
+                            <a th:href="@{/stade/delete(id=${stade.id})}" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div th:if="${message}" th:text="${message}" class="alert-danger mb-3"/>
+            <a th:href = "@{/}" class="btn btn-secondary mt-3">Back to Welcome Page</a>
+        </div>
+    </body>
+</html>

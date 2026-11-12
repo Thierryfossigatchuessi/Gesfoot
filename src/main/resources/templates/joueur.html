@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+ <html lang="fr" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Joueur List</title>
+        <meta charset="UTF-8"/>
+       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" 
+integrity="sha384
+KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" 
+crossorigin="anonymous"/>
+
+    </head>
+    <body>
+         <div class="container my-2" >
+        <h1>Joueur List</h1>
+        <hr />
+            <a th:href = "@{/joueur/new}" class="btn btn-primary btn-sm mb-3">Add Joueur</a>
+            
+           
+            <div class="row">               
+                <div class="col">
+            
+            <form action="/joueur/search" method="get" class="mb-3">
+                <div class="form-group">
+        <label>Nom ou prenom:</label>
+    <input type="text" name="search" placeholder="Rechercher par nom ou prénom" class="form-control" />
+    <button type="submit" class="btn btn-primary mt-2">Rechercher</button>
+                </div>
+</form>
+                </div>
+            <h2 class="mb-3">  Joueur List</h2>
+        <table  class="table table-striped" >
+ <thead>
+ <tr>
+ <th>Joueur Nom</th>
+  <th>Joueur Prenom</th> 
+   <th>Joueur Date_naissance</th>
+    <th>Joueur Poste</th>
+     <th>Joueur Numero</th>
+      <th>Joueur Equipe</th>
+ <th>Actions</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr th:each="joueur : ${listJoueur}">
+ <td th:text="${joueur.nom}"></td>
+  <td th:text="${joueur.prenom}"></td>
+   <td th:text="${joueur.dateNaissance}"></td>
+    <td th:text="${#temporals.format(joueur.dateNaissance,'dd/MM/yyyy')}"></td>
+    <td th:text="${joueur.poste}"></td>
+     <td th:text="${joueur.numero}"></td>
+      <td th:text="${joueur.equipe != null ? joueur.equipe.nom : 'Aucune équipe'}"></td>
+      <td><a th:href="@{/joueur/update(id=${joueur.id})}" class="btn btn-primary">Update</a>
+       <a th:href="@{/joueur/delete(id=${joueur.id})}" class="btn btn-danger"
+          onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce joueur?')">Delete</a>
+      </td>
+       
+ </tr>
+ </tbody>
+ </table>
+            <div th:if="${message}" th:text="${message}" class="alert-danger mb-3"/>
+           <a th:href="@{/}" class="btn btn-secondary mt-3">Back to Welcome Page</a>
+         </div>
+    </body>
+ </html>

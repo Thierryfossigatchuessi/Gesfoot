@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Player Management System</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" 
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous" />
+    </head>
+    <body>
+        <div class="container">
+            <h1>Manage Joueur</h1>
+            <hr />
+            <h2>New Joueur</h2>
+            
+            <form action="#" th:action="@{/joueur/saveNew}" th:object="${joueur}" method="POST">
+                <!-- Div row with bg-light, g-3 for gutters, p-3 for padding -->
+                <div class="row bg-light g-3 p-3">
+                    <div class="mb-4 col-4">
+                        <label th:for="nom">Nom</label>
+                        <input type="text" th:field="*{nom}" placeholder=" Nom du joueur" class="form-control" />
+                        <span class="text-danger" th:errors="*{nom}"></span>
+                    </div>
+                    <div class="mb-4 col-4">
+                        <label th:for="prenom">Prenom</label>
+                        <input type="text" th:field="*{prenom}" placeholder=" Prenom du joueur" class="form-control" />
+                        <span class="text-danger" th:errors="*{prenom}"></span>
+                    </div>
+                    <div class="mb-4 col-4">
+                        <label th:for="dateDeNaissance">Date de naissance</label>
+                        <input type="date" th:field="*{dateNaissance}" placeholder="Date de naissance" class="form-control" />
+                        <span class="text-danger" th:errors="*{dateNaissance}"></span>
+                    </div>
+                    <div class="mb-4 col-4">
+                        <label th:for="poste">Poste</label>
+                        <select th:field="*{poste}" class="form-control">
+                            <option value="GARDIEN">GARDIEN</option>
+                            <option value="DEFENSEUR">DEFENSEUR</option>
+                            <option value="MILIEUX">MILIEUX</option>
+                            <option value="ATTAQUANT">ATTAQUANT</option>
+                        </select>
+                        <span class="text-danger" th:errors="*{poste}"></span>
+                    </div>
+                    <div class="mb-4 col-4">
+                        <label th:for="numero">Numero</label>
+                        <input type="number" th:field="*{numero}" placeholder="numero du joueur" class="form-control" />
+                        <span class="text-danger" th:errors="*{numero}"></span>
+                    </div>
+                    <div class="mb-4 col-4">
+                        <label th:for="equipe">Equipe</label>
+                        <select th:field="*{equipe}" class="form-control">
+                            <option th:each="equipe : ${equipes}" th:value="${equipe.id}" th:text="${equipe.nom}"></option>
+                        </select>
+                        <span class="text-danger" th:errors="*{equipe}"></span>
+                    </div>
+                </div>
+
+                <div>
+                    <button type="submit" class="btn btn-primary col-2">Save</button>
+                    <a th:href = "@{/joueur}" class="btn btn-danger col-2">Cancel</a>
+                </div>
+            </form>
+            
+            <hr />
+            
+        </div>
+    </body>
+</html>

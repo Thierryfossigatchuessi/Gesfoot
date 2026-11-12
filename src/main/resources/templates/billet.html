@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Liste des Billets</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" 
+              integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" 
+              crossorigin="anonymous"/>
+    </head>
+    <body>
+        <div class="container my-2">
+            <h1>Liste des Billets</h1>
+            <hr />
+            <a href="/billet/new" class="btn btn-primary btn-sm mb-3">Ajouter un nouveau billet</a>
+            
+            <h2 class="mb-3">Billets</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Prix</th>
+                        <th>Vendu</th>
+                        <th>Date d'achat</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="billet : ${listBillet}">
+                        <td th:text="${billet.id}"></td>
+                        <td th:text="${billet.prix}"></td>
+                        <td th:text="${billet.vendu ? 'Oui' : 'Non'}"></td>
+                        <td th:text="${billet.dateAchat}"></td>
+                        <td>
+                            <a th:href="@{/billet/update(id=${billet.id})}" class="btn btn-primary">Modifier</a>
+                            <a th:href="@{/billet/delete(id=${billet.id})}" class="btn btn-danger" 
+                               onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce billet ?');">Supprimer</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <a href="/" class="btn btn-secondary mt-3">Retour à la page d'accueil</a>
+        </div>
+    </body>
+</html>

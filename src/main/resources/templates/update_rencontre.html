@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Ajout d'une Rencontre</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" 
+              integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous" />
+    </head>
+    <body>
+        <div class="container">
+            <h1>Ajout d'une Rencontre</h1>
+            <hr />
+
+            <form action="#" th:action="@{/rencontre/saveUpdate}" th:object="${rencontre}" method="POST">
+                <!-- Équipe 1 -->
+                <input type="hidden" th:field="*{id}" />
+
+                <div class="mb-4 col-6">
+                    <label th:for="equipe1">Équipe 1</label>
+                    <select th:field="*{equipe1}" class="form-select">
+                        <option th:each="equipe : ${listEquipes}" th:value="${equipe.id}" th:text="${equipe.nom}">
+                            Sélectionnez une équipe
+                        </option>
+                    </select>
+                    <span class="text-danger" th:errors="*{equipe1}"></span>
+                </div>
+
+                <!-- Équipe 2 -->
+                <div class="mb-4 col-6">
+                    <label th:for="equipe2">Équipe 2</label>
+                    <select th:field="*{equipe2}" class="form-select">
+                        <option th:each="equipe : ${listEquipes}" th:value="${equipe.id}" th:text="${equipe.nom}">
+                            Sélectionnez une équipe
+                        </option>
+                    </select>
+                    <span class="text-danger" th:errors="*{equipe2}"></span>
+                </div>
+
+                <!-- Stade -->
+                <div class="mb-4 col-6">
+                    <label th:for="stade">Stade</label>
+                    <select th:field="*{stade}" class="form-select">
+                        <option th:each="stade : ${listStades}" th:value="${stade.id}" th:text="${stade.nom}">
+                            Sélectionnez un stade
+                        </option>
+                    </select>
+                    <span class="text-danger" th:errors="*{stade}"></span>
+                </div>
+
+                <!-- Date et Heure -->
+                <div class="mb-4 col-6">
+                    <label th:for="dateEtHeure">Date et Heure</label>
+                    <input type="datetime-local" th:field="*{dateEtHeure}" class="form-control"/> 
+                    <span class="text-danger" th:errors="*{dateEtHeure}"></span>
+                    
+                </div>
+
+                <!-- Arbitre -->
+                <div class="mb-4 col-6">
+                    <label th:for="arbitre">Nom de l'Arbitre</label>
+                    <input type="text" th:field="*{arbitre}" placeholder="Nom de l'arbitre" class="form-control" />
+                    <span class="text-danger" th:errors="*{arbitre}"></span>
+                </div>
+
+                <!-- Score -->
+                <div class="mb-4 col-6">
+                    <label th:for="score">Score</label>
+                    <input type="text" th:field="*{score}" placeholder="Score (ex. 2-1)" class="form-control" />
+                    <span class="text-danger" th:errors="*{score}"></span>
+                </div>
+                <div>
+                    <p class="text-danger alert-danger form-control"
+                       th:if="${errorMemeEquipe != null}"
+                       th:text="${errorMemeEquipe}">
+                    </p>
+                </div>
+
+                <!-- Boutons -->
+                <div>
+                    <button type="submit" class="btn btn-primary col-2">Enregistrer</button>
+                    <a th:href="@{/rencontre}" class="btn btn-danger col-2">Annuler</a>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

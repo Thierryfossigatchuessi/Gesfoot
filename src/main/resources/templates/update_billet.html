@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Mettre à Jour un Billet</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" 
+              integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" 
+              crossorigin="anonymous"/>
+    </head>
+    <body>
+        <div class="container my-4">
+            <h1 class="mb-4">Modifier un Billet</h1>
+            <form action="/billet/saveUpdate" method="post">
+                <!-- Utilisation de l'id du billet pour la mise à jour -->
+                <input type="hidden" name="id" th:value="${billet.id}" />
+                
+                <!-- Ajout d'une div row avec le fond bg-light, les gouttières de 3, et les marges intérieures et extérieures -->
+                <div class="row bg-light g-3 p-3">
+                    <div class="col-5">
+                        <div class="mb-3">
+                            <label for="prix" class="form-label">Prix :</label>
+                            <input type="number" id="prix" name="prix" th:value="${billet.prix}" required class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="col-5">
+                        <div class="mb-3">
+                            <label for="vendu" class="form-label">Vendu :</label>
+                            <input type="checkbox" id="vendu" name="vendu" th:checked="${billet.vendu}" class="form-check-input" />
+                        </div>
+                    </div>
+
+                    <div class="col-5">
+                        <div class="mb-3">
+                            <label for="dateAchat" class="form-label">Date d'achat :</label>
+                            <input type="date" id="dateAchat" name="dateAchat" th:value="${billet.dateAchat}" required class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="col-5">
+                        <div class="mb-3">
+                            <label for="spectateur" class="form-label">Spectateur :</label>
+                            <select id="spectateur" name="spectateur.id" class="form-select">
+                                <option th:each="spectateur : ${spectateurs}" 
+                                        th:value="${spectateur.id}" 
+                                        th:text="${spectateur.nom} + ' ' + ${spectateur.prenom}"
+                                        th:selected="${billet.spectateur.id == spectateur.id}"></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-5">
+                        <div class="mb-3">
+                            <label for="rencontre" class="form-label">Rencontre :</label>
+                            <select id="rencontre" name="rencontre.id" class="form-select">
+                                <option th:each="rencontre : ${rencontres}" 
+                                        th:value="${rencontre.id}" 
+                                        th:text="${rencontre.dateEtHeure}"
+                                        th:selected="${billet.rencontre.id == rencontre.id}"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Mettre à jour</button>
+            </form>
+
+            <a href="/billet" class="btn btn-secondary mt-3">Retour à la liste des billets</a>
+        </div>
+    </body>
+</html>
